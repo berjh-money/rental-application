@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Residential Rental Application Form</title>
+  <style>
+    :root {
+      --ink: #252525;
+      --muted: #666;
+      --line: #d8d8d8;
+      --accent: #2d6cdf;
+      --bg: #f4f5f7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.5 Arial, Helvetica, sans-serif;
+    }
+    .page {
+      width: min(900px, calc(100% - 32px));
+      margin: 38px auto;
+      background: #fff;
+      padding: clamp(22px, 5vw, 52px);
+      border-radius: 7px;
+      box-shadow: 0 3px 18px rgba(0,0,0,.08);
+    }
+    h1 { font-size: clamp(28px, 4vw, 38px); line-height: 1.15; margin: 0 0 12px; }
+    .intro { color: #555; margin: 0 0 22px; }
+    .house {
+      width: 100%;
+      height: 170px;
+      display: block;
+      object-fit: cover;
+      border-radius: 4px;
+      margin: 0 0 28px;
+      background: #e9edf1;
+    }
+    h2 { font-size: 21px; margin: 24px 0 15px; }
+    h3 { font-size: 19px; margin: 20px 0 10px; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .field { min-width: 0; margin-bottom: 16px; }
+    label, .field-title { display: block; font-weight: 600; margin-bottom: 7px; }
+    input, select {
+      display: block;
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid #cfcfcf;
+      border-radius: 3px;
+      background: #fff;
+      color: #222;
+      font: inherit;
+    }
+    input:focus, select:focus { outline: 2px solid rgba(45,108,223,.22); border-color: var(--accent); }
+    .name-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .choices { display: flex; gap: 28px; flex-wrap: wrap; padding: 4px 0 8px; }
+    .choices label {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-weight: 400; margin: 0; cursor: pointer;
+    }
+    .choices input { width: 17px; min-height: 17px; height: 17px; margin: 0; accent-color: var(--accent); }
+    hr { border: 0; border-top: 1px solid #ddd; margin: 24px 0; }
+    .payment-note { font-weight: 700; margin: 0 0 14px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    button {
+      border: 0; border-radius: 4px; padding: 12px 20px; min-height: 45px;
+      font: 600 15px Arial, Helvetica, sans-serif; cursor: pointer;
+    }
+    .secondary { background: #eee; color: #222; }
+    .primary { background: var(--accent); color: white; }
+    .secure { text-align: center; color: #555; font-size: 14px; margin: 22px 0 0; }
+    .status { display: none; padding: 12px; margin-top: 16px; background: #f1f6ff; border: 1px solid #c9dcff; border-radius: 4px; }
+    @media (max-width: 600px) {
+      .page { margin: 16px auto; width: calc(100% - 20px); padding: 22px 18px; }
+      .grid, .name-grid { grid-template-columns: 1fr; gap: 0; }
+      .house { height: 135px; }
+      .actions button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <h1>Residential Rental<br>Application Form</h1>
+    <p class="intro">Please fill out the form below to apply for a rental property.</p>
+
+    <svg class="house" viewBox="0 0 1200 260" role="img" aria-label="House" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="260" fill="#e7edf1"/>
+      <circle cx="1000" cy="50" r="28" fill="#fff7d6"/>
+      <path d="M0 210 Q200 160 400 205 T800 195 T1200 205 V260 H0Z" fill="#b9cbb5"/>
+      <rect x="400" y="94" width="400" height="145" fill="#f8f4ed"/>
+      <path d="M355 105 L600 10 L845 105Z" fill="#586b7d"/>
+      <rect x="445" y="127" width="82" height="66" fill="#b9d7e5"/>
+      <rect x="673" y="127" width="82" height="66" fill="#b9d7e5"/>
+      <path d="M477 127 V193 M445 160 H527 M705 127 V193 M673 160 H755" stroke="#fff" stroke-width="7"/>
+      <rect x="562" y="160" width="76" height="79" fill="#8b725d"/>
+      <circle cx="622" cy="201" r="4" fill="#f6d88d"/>
+      <path d="M365 239 V104 M835 239 V104" stroke="#f8f4ed" stroke-width="12"/>
+      <path d="M0 235 H1200" stroke="#9eb39b" stroke-width="5"/>
+    </svg>
+
+    <form id="rental-form">
+      <h2>Applicant's Name</h2>
+      <div class="name-grid">
+        <div class="field"><label for="first-name">First Name</label><input id="first-name" name="firstName" placeholder="First Name" autocomplete="given-name" required></div>
+        <div class="field"><label for="last-name">Last Name</label><input id="last-name" name="lastName" placeholder="Last Name" autocomplete="family-name" required></div>
+      </div>
+
+      <div class="grid">
+        <div class="field"><label for="phone">Phone Number</label><input id="phone" name="phone" type="tel" placeholder="(000) 000-0000" autocomplete="tel" required></div>
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required></div>
+        <div class="field"><label for="dob">Date of Birth</label><input id="dob" name="dob" type="date" required></div>
+      </div>
+
+      <div class="field">
+        <span class="field-title">Do you have a Vehicle?</span>
+        <div class="choices">
+          <label><input type="radio" name="vehicle" value="Yes" required> Yes</label>
+          <label><input type="radio" name="vehicle" value="No"> No</label>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="field"><label for="occupation">Occupation / Job Title?</label><input id="occupation" name="occupation" placeholder="e.g Engineer" required></div>
+        <div class="field"><label for="occupants">Number of person who will occupy the property</label><input id="occupants" name="occupants" type="number" min="1" placeholder="e.g 3" required></div>
+      </div>
+
+      <hr>
+      <div class="field">
+        <span class="field-title">Do you have pet?</span>
+        <div class="choices">
+          <label><input type="radio" name="pet" value="Yes" required> Yes</label>
+          <label><input type="radio" name="pet" value="No"> No</label>
+        </div>
+      </div>
+
+      <h2>Current Address</h2>
+      <div class="field"><label for="address">Street Address</label><input id="address" name="address" autocomplete="street-address" required></div>
+      <div class="field"><label for="address2">Street Address Line 2</label><input id="address2" name="address2"></div>
+      <div class="grid">
+        <div class="field"><label for="city">City</label><input id="city" name="city" autocomplete="address-level2" required></div>
+        <div class="field"><label for="state">State / province</label><input id="state" name="state" autocomplete="address-level1" required></div>
+        <div class="field"><label for="postal">Postal / Zip Code</label><input id="postal" name="postal" autocomplete="postal-code" required></div>
+      </div>
+
+      <hr>
+      <div class="grid">
+        <div class="field"><label for="duration">Duration of Occupancy</label><input id="duration" name="duration" placeholder="e.g 2 years" required></div>
+        <div class="field"><label for="move-in">Move In Date</label><input id="move-in" name="moveIn" type="date" required></div>
+      </div>
+
+      <h3>$75 Refundable Aplication Fee</h3>
+      <p class="payment-note">Preferred payment method:</p>
+      <div class="choices">
+        <label><input type="radio" name="paymentMethod" value="Chime" required> Chime</label>
+        <label><input type="radio" name="paymentMethod" value="Bitcoin"> Bitcoin</label>
+        <label><input type="radio" name="paymentMethod" value="PayPal"> PayPal</label>
+      </div>
+
+      <div class="actions">
+        <button class="secondary" type="button" id="refund">Request For Refund</button>
+        <button class="primary" type="submit">Submit Application</button>
+      </div>
+      <p class="secure">🔒 Your information is secure and confidential.</p>
+      <div class="status" id="status" role="status" aria-live="polite"></div>
+    </form>
+  </main>
+  <script>
+    // Front-end demonstration only: this page does not transmit or store application data
+    // and does not process payments.
+    const statusBox = document.getElementById('status');
+    document.getElementById('rental-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!event.currentTarget.reportValidity()) return;
+      statusBox.style.display = 'block';
+      statusBox.textContent = 'Demo only: your application has not been sent. Connect a secure backend before accepting real applications.';
+    });
+    document.getElementById('refund').addEventListener('click', () => {
+      statusBox.style.display = 'block';
+      statusBox.textContent = 'Demo only: refund requests are not submitted from this page.';
+    });
+  </script>
+</body>
+</html>
